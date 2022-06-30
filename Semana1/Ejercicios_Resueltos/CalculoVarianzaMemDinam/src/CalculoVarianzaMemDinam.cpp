@@ -3,13 +3,14 @@
 // Author      : Jose
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Calculo de varianza de una poblacion utilizando reserva
+//				 dinamica de memoria.
 //============================================================================
 
 #include <iostream>
-#include <vector>
 #include <iomanip>
 #include <cmath>
+#include <memory>
 
 using namespace std;
 
@@ -59,6 +60,10 @@ int main() {
 		varianza += pow((muestras[i] - valorMedio), 2); // sumatoria((xi - valorMedio)^2)
 	}
 
+	// liberamos memoria reservada y reestablecemos puntero.
+	delete[] muestras;
+	muestras = nullptr;
+
 	//varianza = cantMuestras > 0 ? (varianza / cantMuestras) : 0;
 	if(cantMuestras > 0)
 		varianza /= cantMuestras;
@@ -66,10 +71,6 @@ int main() {
 		varianza = 0;
 
 	cout << "Varianza calculada: " << fixed << setprecision(2) << varianza << endl;
-
-	delete[] muestras;	// evita fuga de memoria.
-
-	muestras = nullptr;	// evita puntero colgante.
 
 	return 0;
 }
